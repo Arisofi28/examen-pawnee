@@ -4,6 +4,7 @@ Estos reportes no indican la causa ni qué archivo cambiar. Hay registros semill
 
 ## B-01 · No se guarda la edición del avistamiento
 
+
 ### Síntoma y reproducción
 Abrir un avistamiento semilla → Editar, cambiar la criatura asociada y la ubicación y guardar. La edición no termina correctamente.
 
