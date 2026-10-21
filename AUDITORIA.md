@@ -57,7 +57,7 @@ Es incorrecto porque debería salir el nombre ya que arriba ya se encuentra el I
 ### Causa
 Explicación causal y archivo/capa, no solo su nombre:
 No tiene acceso a la información adentro del Atlas sino solo al ID. 
-backend/src/services/avistamientos.service.ts
+backend/src/services/avistamientos.service.ts linea 16 
 
 ### Cambio
 Qué modifiqué, por qué resuelve la causa y commit de corrección:
@@ -111,7 +111,7 @@ le cambie {
 ### Causa
 Explicación causal y archivo/capa, no solo su nombre:
 El problema es que tenemos solo 4 parámetros aceptados pero desde el código si se puede cambiar a otro no permitido. 
-backend/src/services/criaturas.service.ts 
+backend/src/services/criaturas.service.ts linea 19
 
 ### Cambio
 Qué modifiqué, por qué resuelve la causa y commit de corrección:
@@ -140,21 +140,45 @@ Al incorporar runValidators: true, Mongoose valida los valores actualizados cont
 ### Prueba
 Pasos/comando, datos, status/resultado esperado y observado DESPUÉS; archivo de evidencia:
 
+400 esperado. Debe rechazarse el valor.
+
+Status se cambio, lo probé nuevamente, debería funcionar porque el código es correcto. Sin embargo, por el problema del servidor se esta actualizando al proyecto anterior. El error esta resuelto pero no lo puedo comprobar en mi computadora
+
 ### Estado
 Resuelto / parcial / no resuelto. Si es parcial, qué falta:
+
+RESUELTO, parcial sin comprobar. Debe funcionar normalmente
 
 ## B-04 · El filtro de avistamientos no actualiza
 ### Síntoma
 Acción/datos, esperado y observado ANTES:
 
+El problema es en avistamientos, en la lista general. Al momento de seleccionar se mantiene la lista como siempre, no se actualiza a menos de darle manualmente al botón de actualizar.
+
 ### Causa
 Explicación causal y archivo/capa, no solo su nombre:
+El problema es que cuando se esta recargando tiene en general y no especifico para cada criatura. 
+frontend/src/paginas/ListaAvistamientos.tsx linea 11 
 
 ### Cambio
 Qué modifiqué, por qué resuelve la causa y commit de corrección:
 
+antes: 
+[recarga]
+ahora: 
+ [recarga, criaturaId] 
+
+React utiliza el arreglo de dependencias de useEffect para decidir cuándo ejecutar nuevamente un efecto.
+
+Antes dependía exclusivamente de recarga, por lo que cambiar criaturaId no iniciaba otra consulta.
+
+Al incluir criaturaId, React vuelve a ejecutar listarAvistamientos(criaturaId) cuando cambia el selector.
+
+
 ### Prueba
 Pasos/comando, datos, status/resultado esperado y observado DESPUÉS; archivo de evidencia:
+
+Ahora si actualizamos de nuevo la selección y se coloca automaticamente el filtro sin necesidad de darle al botón de actualizar. Adjunto fotos en el pdf
 
 ### Estado
 Resuelto / parcial / no resuelto. Si es parcial, qué falta:

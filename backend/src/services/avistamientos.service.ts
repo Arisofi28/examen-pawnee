@@ -21,6 +21,7 @@ export async function obtener(id: string) {
 
   return doc;
 }
+
 export async function crear(body: unknown) {
   const datos = cuerpo(body, campos, ['criatura', 'testigo', 'ubicacion', 'fecha']);
   await comprobarCriatura(datos.criatura as string);
